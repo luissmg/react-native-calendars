@@ -56,8 +56,6 @@ export default class AgendaView extends Component {
     // specify your item comparison function for increased performance
     rowHasChanged: PropTypes.func,
 
-    shouldChangeDay: PropTypes.func,
-
     // Max amount of months allowed to scroll to the past. Default = 50
     pastScrollRange: PropTypes.number,
 
@@ -254,10 +252,6 @@ export default class AgendaView extends Component {
   }
 
   chooseDay(d, optimisticScroll) {
-    if (!this.props.shouldChangeDay(d)) {
-      return;
-    }
-
     const day = parseDate(d);
     this.setState({
       calendarScrollable: false,
@@ -305,10 +299,6 @@ export default class AgendaView extends Component {
   }
 
   onDayChange(day) {
-    if (!this.props.shouldChangeDay(day)) {
-      return;
-    }
-
     const newDate = parseDate(day);
     const withAnimation = dateutils.sameMonth(newDate, this.state.selectedDay);
     this.calendar.scrollToDay(day, this.calendarOffset(), withAnimation);
