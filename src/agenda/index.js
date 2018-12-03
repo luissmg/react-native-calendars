@@ -4,6 +4,7 @@ import {
   View,
   Dimensions,
   Animated,
+  BackHandler,
   ViewPropTypes,
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -119,6 +120,7 @@ export default class AgendaView extends Component {
     this.onStartDrag = this.onStartDrag.bind(this);
     this.onSnapAfterDrag = this.onSnapAfterDrag.bind(this);
     this.generateMarkings = this.generateMarkings.bind(this);
+    this.handleAndroidBack = this.handleAndroidBack.bind(this);
     this.knobTracker = new VelocityTracker();
     this.state.scrollY.addListener(({value}) => this.knobTracker.add(value));
   }
@@ -219,10 +221,14 @@ export default class AgendaView extends Component {
   componentWillMount() {
     this._isMounted = true;
     this.loadReservations(this.props);
+
+    BackHandler.addEventListener('hardwareBackPress', this.handleAndroidBack);
   }
 
   componentWillUnmount() {
     this._isMounted = false;
+
+    BackHandler.removeEventListener('hardwareBackPress', this.handleAndroidBack);
   }
 
   componentWillReceiveProps(props) {
@@ -232,6 +238,16 @@ export default class AgendaView extends Component {
       });
     } else {
       this.loadReservations(props);
+    }
+  }
+
+  handleAndroidBack() {
+    if (this.state.calendarScrollable && this.state.selectedDay) {
+      this._chooseDayFromCalendar(this.state.selectedDay);
+      return true;
+    }
+    else {
+      return false;
     }
   }
 
