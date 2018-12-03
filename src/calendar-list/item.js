@@ -7,6 +7,7 @@ class CalendarListItem extends Component {
   static defaultProps = {
     hideArrows: true,
     hideExtraDays: true,
+    selectedDayOutline: false,
   };
 
   constructor(props) {
@@ -44,6 +45,7 @@ class CalendarListItem extends Component {
           dayComponent={this.props.dayComponent}
           disabledByDefault={this.props.disabledByDefault}
           showWeekNumbers={this.props.showWeekNumbers}
+          selectedDayOutline={this.props.selectedDayOutline}
         />);
     } else {
       const text = row.toString();

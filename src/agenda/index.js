@@ -93,6 +93,8 @@ export default class AgendaView extends Component {
 
     // show Only Day Selected. Default = false
     showOnlyDaySelected: PropTypes.bool,
+
+    selectedDayOutline: PropTypes.bool,
   };
 
   constructor(props) {
@@ -443,6 +445,7 @@ export default class AgendaView extends Component {
               disabledByDefault={this.props.disabledByDefault}
               displayLoadingIndicator={this.props.displayLoadingIndicator}
               showWeekNumbers={this.props.showWeekNumbers}
+              selectedDayOutline={this.props.selectedDayOutline}
             />
           </Animated.View>
           {knob}

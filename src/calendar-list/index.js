@@ -54,6 +54,7 @@ class CalendarList extends Component {
     scrollEnabled: true,
     scrollsToTop: false,
     removeClippedSubviews: Platform.OS === 'android' ? false : true,
+    selectedDayOutline: false,
   }
 
   constructor(props) {

@@ -75,7 +75,9 @@ class Calendar extends Component {
     // Handler which gets executed when press arrow icon left. It receive a callback can go back month
     onPressArrowLeft: PropTypes.func,
     // Handler which gets executed when press arrow icon left. It receive a callback can go next month
-    onPressArrowRight: PropTypes.func
+    onPressArrowRight: PropTypes.func,
+
+    selectedDayOutline: PropTypes.bool,
   };
 
   constructor(props) {
@@ -182,6 +184,7 @@ class Calendar extends Component {
           onLongPress={this.longPressDay}
           date={xdateToData(day)}
           marking={this.getDateMarking(day)}
+          selectedOutline={this.props.selectedDayOutline}
         >
           {date}
         </DayComp>

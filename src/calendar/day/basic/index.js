@@ -19,7 +19,8 @@ class Day extends Component {
     marking: PropTypes.any,
     onPress: PropTypes.func,
     onLongPress: PropTypes.func,
-    date: PropTypes.object
+    date: PropTypes.object,
+    selectedOutline: PropTypes.bool,
   };
 
   constructor(props) {
@@ -62,9 +63,12 @@ class Day extends Component {
     }
 
     if (marking.selected) {
-      containerStyle.push(this.style.selected);
+      containerStyle.push(this.props.selectedOutline ? this.style.selectedOutline : this.style.selected);
       if (marking.selectedColor) {
-        containerStyle.push({backgroundColor: marking.selectedColor});
+        containerStyle.push(this.props.selectedOutline
+          ? { borderColor: marking.selectedColor }
+          : { backgroundColor: marking.selectedColor }
+        );
       }
       dotStyle.push(this.style.selectedDot);
       textStyle.push(this.style.selectedText);
