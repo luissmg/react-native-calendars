@@ -46,6 +46,10 @@ class Day extends Component {
     const textStyle = [this.style.text];
     const dotStyle = [this.style.dot];
 
+    if (this.props.selectedOutline) {
+      textStyle.push({ marginBottom: -1 });
+    }
+
     let marking = this.props.marking || {};
     if (marking && marking.constructor === Array && marking.length) {
       marking = {

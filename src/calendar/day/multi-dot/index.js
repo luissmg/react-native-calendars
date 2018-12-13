@@ -20,7 +20,8 @@ class Day extends Component {
     marking: PropTypes.any,
     onPress: PropTypes.func,
     onLongPress: PropTypes.func,
-    date: PropTypes.object
+    date: PropTypes.object,
+    selectedOutline: PropTypes.bool,
   };
 
   constructor(props) {
@@ -61,14 +62,21 @@ class Day extends Component {
     const containerStyle = [this.style.base];
     const textStyle = [this.style.text];
 
+    if (this.props.selectedOutline) {
+      textStyle.push({ marginBottom: -1 });
+    }
+
     const marking = this.props.marking || {};
     const dot = this.renderDots(marking);
 
     if (marking.selected) {
-      containerStyle.push(this.style.selected);
+      containerStyle.push(this.props.selectedOutline ? this.style.selectedOutline : this.style.selected);
       textStyle.push(this.style.selectedText);
       if (marking.selectedColor) {
-        containerStyle.push({backgroundColor: marking.selectedColor});
+        containerStyle.push(this.props.selectedOutline
+          ? { borderColor: marking.selectedColor }
+          : { backgroundColor: marking.selectedColor }
+        );
       }
     } else if (typeof marking.disabled !== 'undefined' ? marking.disabled : this.props.state === 'disabled') {
       textStyle.push(this.style.disabledText);

@@ -30,6 +30,7 @@ export default function styleConstructor(theme={}) {
       borderColor: appStyle.selectedDayBackgroundColor,
       borderRadius: 16,
       borderWidth: 1,
+      margin: -1,
     },
     today: {
       backgroundColor: appStyle.todayBackgroundColor
